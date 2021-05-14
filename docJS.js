@@ -101,3 +101,106 @@ console.log(ex_reduce);
 // c. nilai awal Cvalue adalah 0 dan cElement adalah element dengan indeks ke 0
 // d. jika anda ingin melakukan operasi menggunakan method reduce, maka semua hasilnya akan otomatis disimpan ke dalam parameter Cvalue
 
+
+// ----------------------------------------- //
+
+// 6. Template Literals
+// dilambangkan dengan simbol backtick (``) . Template literal fungsinya sama seperti tanda petik, yaitu untuk membungkus karakter agar menjadikanya string, namun pada template literal terdapat fitur spesial yang hanya dapat digunakan olehnya. 
+// dengan template literal kita dapat menuliskan variabel / fungsi / apapun didalamnya tanpa error, sedangkan di tanda petik biasa, hal itu tidak dapat dilakukan.
+// cara menuliskan nya juga mudah, yaitu dibungkus ke dalam curly bracket( {} ) yang didahului oleh tanda dolar => ${...}
+// menggunakan tanda petik biasa 
+const mantab = "mantab";
+const kata = "halo semua ${mantab}"; // tidak akan berfungsi, malah akan mencetak ${mantab}, bukan isi variabel nya
+const kata_tl = `Halo semua ${mantab}`; // akan mencetak variabel mantab
+
+
+// ----------------------------------------- //
+
+// 7. Destructuing Assignment 
+// adalah sebuah fitur terbaru di ES6 yang memungkinkan kita memasukan value ke dalam lebih dari 1 variabel sekaligus. Karena fitur ini susah dijelaskan jika secara lisan, mending kita langsung praktek saja
+
+// a. Destructuring Array
+// dengan fitur destructuring, kita dapat memecah element array dan memasukan valuenya ke dalam variabel secara langsung. Ini fitur destructuring array. Setiap element array akan masuk ke dalam variabel sesuai urutanya.
+const arr_mantab = [1,2]; // deklarasi array
+const [a,b] = arr_mantab; 
+// hancurkan array, masukan ke dalam variabel a dan b, a berisi indeks ke 0 dan seterusnya. 
+// fitur ini sangat berguna sekali untuk efisiensi code
+
+// b. Destructuring Object
+// sama seperti array, namun jika kita ingin men-destructuring sebuah object, maka nama variabel harus sama dengan nama property pada object nya.
+const obj_mantab = {
+    "halo" : "semua",
+    "aku" : "semangat"
+};
+const {halo, aku} = obj_mantab;
+// prop halo, akan assign ke var halo dan seterusnya
+
+// ada trik agar kita agar bisa memberikan nama variabel yang berbeda dengan nama property object
+// cara nya adalah beri nama variabel yang diinginkan di belakang nama variabel, dengan didahului tanda titik 2 (:)
+const {halo: pakpak, aku: bubu} = obj_mantab;
+// maka sekarang nama variabel nya bukan lagi halo dan aku, namun pakpak dan bubu.
+
+// c. Destructuring Function
+// kita juga bisa menggunakan konsep diatas untuk memecah parameter yang dikirimkan, bisa array ataupun object. dan fitur ini sangat berguna sekali.
+
+// destructuring function => array
+function mantabbb([jojo,bizare]) 
+{
+    // fungsi ini menerima argument berupa array, dan nantinya saat diterima, nilai dari array akan langsung dipecah(di - destructuring)
+
+    return jojo * bizare;
+}
+
+// destructuring function => object
+function obj_ahaq({abah, umi})
+{
+    return abah**umi;
+}
+class Uhuk
+{
+    abah = 12;
+    umi = 3;
+}
+console.log(obj_ahaq(new Uhuk)); // hasilnya adalah 1728, atau sesuai dengan hasil operasi return function nya, yaitu prop abah dipangkatkan pro umi = 12 pangkat 3.
+
+
+// ----------------------------------------- //
+
+// 8. for of...    VS    for in...
+// Selain for dan foreach, ada 2 macam lagi perulangan for di dalam javascript, disini kita akan membahas .keduanya.
+
+// a. for in...
+// for in... berguna untuk me-looping sebuah object, 
+// INGAT!!! yang di-looping disini hanyalah property dari object itu saja, sedangkan method nya tidak akan di ikutkan ke dalam perulangan
+
+class FORIN
+{
+    F1 = 12;
+    F2 = 3;
+}
+for(let i in new FORIN) {
+    console.log(i);
+}
+
+// b. for of...
+// for of... berguna untuk melooping object yang mempunyai sifat itterable / mempunyai indeks.
+const string = "Maulana Yusuf";
+for(let i of string) 
+{
+    console.log(i);
+}
+// kita akan me-looping string nya menjadi satu satu, jadi M lalu a lalu u dan seterusnya sampai habis. 
+// ini sama seperti kita mengulangnya dengan for namun kita membutuhkan indeks untuk mengakses value dari element string nya.
+// cara ini jauh lebih lanjay jika kita ingin me-looping object itterable, dari pada menggunakan foreach atau for loop 
+// di for of kan tidak ada indeks nya kak, lalu bagaimana?
+// tenang, kita dapat menambahkan indeks secara manual, menggunakan method entries() , yang parameternya adalah object yang ingin di looping.
+for (let [indeks, v] of Object.entries(string))
+{
+    // indeks melambangkan indeks nya, sedangkan v melambangkan value nya
+    if(v !== ' ') {
+        console.log(`Huruf ${v} mempunyai indeks ke ${indeks}`);
+    } else {
+        console.log("spasi");
+    }
+}
+
