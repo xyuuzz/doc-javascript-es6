@@ -204,3 +204,53 @@ for (let [indeks, v] of Object.entries(string))
     }
 }
 
+
+// ----------------------------------------- //
+
+// 9. Spread Operator
+// => merupakan operator pada javascript yang dilambangkan dengan titik sebanyak 3 kali (...). 
+// Contoh fungsi spread operator adalah untuk menggabungkan array namun tidak berbentuk array multidimensi. Sedangkan jika kita menggabungkan 2 element array ke satu array, nama secara otomatis akan berbentuk array multidimensi.
+const uhuk = ["maulana", "yusuf", "muhibin"];
+const ahaqmantab = ["anak", "pertama"];
+const gabungan_salah = [uhuk, ahaqmantab]; // berbentuk array multidimensi
+const gabungan_benar = [...uhuk, ...ahaqmantab]; // tidak berbentuk array multidimensi(langsung)
+// dengan menggunakan cara diatas, kita dapat lebih fleksibel untuk memanipulasi array.
+
+// Spread operator juga dapat digunakan untuk mengubah berbagai tipe data yang mirip dengan array(nodelist, arguments, dll) menjadi sebuah array, sehingga kita dapat menggunakan method yang hanya bisa digunakan oleh array.
+
+
+// ----------------------------------------- //
+
+// 10. Rest Parameter
+// => Rest parameter adalah sebuah Spread operator yang digunakan untuk menangkap argument pada sebuah function yang tidak menentu jumlahnya(acak).
+const agak = (...a) => {
+    // variabel agak dapat menerima argument yang jumlah nya acak karena memiliki rest parameter. dan variabel yang dijadikan rest parameter ini akan berbentuk array, meskipun argument yang ditangkap berjumlah satu.
+    a.forEach(b => console.log(b));
+};
+agak(1,2,3,4,5);
+
+
+// ----------------------------------------- //
+
+// Promise
+const con = false;
+const ankay = new Promise((resolve, reject) => {
+    if(con) {
+        resolve("berhasil");
+    } else {
+        reject("gagal:(");
+    }
+});
+ankay
+    .then(jawaban => console.log(jawaban))
+    .catch(err => console.log(err));
+
+
+// ----------------------------------------- //
+
+
+// Fetch
+
+fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
+    .then(response => response.json())
+    .then(response => console.log(response.Search));
