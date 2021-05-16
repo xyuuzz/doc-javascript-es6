@@ -234,7 +234,7 @@ agak(1,2,3,4,5);
 
 // Promise
 // => Promise, sesuai artinya(janji), Promise adalah sebuah object asynchronus di Javacript yang dapat memiliki 2 hasil sesuai aturan dengan janji, yaitu ditepati atau di ingkari. 
-// Object Promise memiliki 2 parameter wajib, yaitu resolve(ditetapi) dan reject(diingkari). 
+// Object Promise memiliki 2 parameter wajib, yaitu resolve(ditetapi) dan reject(diingkari), yang keduanya berbentuk higher order function
 // Object Promise tidak dapat langsung di print, karena bentuk sifatnya yang asynchronus. Jika kita tetap nekat dengan menge-print langsung object Promise, maka hasilnya adalah object Promise itu sendiri.
 // Lantas, bagaimana cara menge-print / mengeluarkan object Promise tersebut?
 // caranya adalah dengan menggunakan method then dan catch
@@ -260,7 +260,6 @@ ankay // chaining method then dan catch untuk mengeluarkan hasil object Promise 
 
 // ----------------------------------------- //
 
-
 // Fetch
 //  => Adalah sebuah higher Order Function yang mengembalikan object Promise.
 // Fetch digunakan untuk mengambil data api(menggantikan ajax), yang di sisi syntax lebih simple dan ringkas
@@ -270,3 +269,44 @@ fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
     .then(response => response.json())
         .then(response => console.log(response.Search))
     .catch(err => console.log(err));
+
+
+// ----------------------------------------- //
+
+// Callback Function
+//  => merupakan sebuah anonymous function yang dideklarasikan sebagai argument yang akan diterima oleh sebuah function. Function yang menerima sebuah callback function disebut Higher Order Function. 
+// Callback merupakan salah satu dari konsep Asynchronus Javascript
+// Berikut adalah salah satu contoh Higher order function yang berkaitan erat dengan konsep asynchronus javascript
+// => setTimeOut Function
+const time = setTimeout(() => {
+    console.log("anjay lanjay");
+}, 3000); // fungsi akan menunggu sebanyak 3000ms untuk menampilkan isi dari anonymous function
+// variabel time berisi sebuah higher order function yang memiliki argument berupa anonymous function dan jumlah jeda sampai fungsi dieksekusi.
+
+
+// Contoh Program Sederhana Dari Higher Order Function setTimeOut 
+
+const tombol = document.getElementById("bu");
+const tampilkan = document.getElementById("isi");
+const tunggu = document.getElementById("tunggu");
+const update = document.getElementById("update");
+
+let n = 1;
+tombol.addEventListener("click", () => {
+    update.innerHTML = "";
+    for(let i = 1; i <= n; i++)
+    {
+        tunggu.innerHTML = `Tunggu selama 0 detik, maka huruf akan terupdate`;
+        setTimeout(() => {
+            tunggu.innerHTML = `Tunggu selama ${i} detik, maka huruf akan terupdate`;
+        }, i*1000);
+    }
+    
+    setTimeout(() => {
+        tampilkan.innerHTML = n;
+        update.innerHTML = n === 11 ? "Number Tereset!" : "Di Update!";
+    }, n*1000);
+
+    n = n === 11 ? 1 : n + 1; 
+
+});
