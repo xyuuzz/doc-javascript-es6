@@ -233,15 +233,27 @@ agak(1,2,3,4,5);
 // ----------------------------------------- //
 
 // Promise
-const con = false;
-const ankay = new Promise((resolve, reject) => {
+// => Promise, sesuai artinya(janji), Promise adalah sebuah object asynchronus di Javacript yang dapat memiliki 2 hasil sesuai aturan dengan janji, yaitu ditepati atau di ingkari. 
+// Object Promise memiliki 2 parameter wajib, yaitu resolve(ditetapi) dan reject(diingkari). 
+// Object Promise tidak dapat langsung di print, karena bentuk sifatnya yang asynchronus. Jika kita tetap nekat dengan menge-print langsung object Promise, maka hasilnya adalah object Promise itu sendiri.
+// Lantas, bagaimana cara menge-print / mengeluarkan object Promise tersebut?
+// caranya adalah dengan menggunakan method then dan catch
+// a. Method then
+//  => method then dijalankan ketika object Promise tersebut mengembalikan method resolve, dan akan mengeluarkan isi dari method resolve.
+// b. Method catch
+//  => method catch biasanya digunakan untuk meng-handle jika object Promise kita mengembalikan method catch(error) yang identik dengan terjadinya error.
+// Cara penggunaan terbaik untuk method then dan catch adalah dengan cara di chaining seperti penggunaan method filter, map dan reduce.
+
+// Contoh Promise :
+const con = false; //kondisi
+const ankay = new Promise((resolve, reject) => { //variabel yang berisi object Promise
     if(con) {
         resolve("berhasil");
     } else {
         reject("gagal:(");
     }
 });
-ankay
+ankay // chaining method then dan catch untuk mengeluarkan hasil object Promise di atas
     .then(jawaban => console.log(jawaban))
     .catch(err => console.log(err));
 
@@ -250,7 +262,11 @@ ankay
 
 
 // Fetch
-
+//  => Adalah sebuah higher Order Function yang mengembalikan object Promise.
+// Fetch digunakan untuk mengambil data api(menggantikan ajax), yang di sisi syntax lebih simple dan ringkas
+// Fetch memiliki 2 parameter, yaitu url api dan 1 nya lagi adalah method yang akan dijalankan untuk api tersebut(get, post, delete dll)
+// Karena fetch mengembalikan object Promise, maka kita wajib menggunakan method then dan catch setelah menggunakan fetch untuk mengeluarkan hasilnya.
 fetch("http://www.omdbapi.com/?apikey=dca61bcc&s=avengers")
     .then(response => response.json())
-    .then(response => console.log(response.Search));
+        .then(response => console.log(response.Search))
+    .catch(err => console.log(err));
